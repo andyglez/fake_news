@@ -1,6 +1,6 @@
-from feature_extraction import lexical
+from feature_extraction.lexical import Lexical
 
-print(lexical.count_total_words(
+a = Lexical(
     '''
     Daniel Greenfield, a Shillman Journalism Fellow at the Freedom Center, is a New York writer focusing on radical Islam. 
 In the final stretch of the election, Hillary Rodham Clinton has gone to war with the FBI. 
@@ -34,4 +34,6 @@ The misguided assault on the FBI tells us that Hillary Clinton and her allies ar
 The Clintons have weathered countless scandals over the years. Whatever they are protecting this time around is bigger than the usual corruption, bribery, sexual assaults and abuses of power that have followed them around throughout the years. This is bigger and more damaging than any of the allegations that have already come out. And they donâ€™t want FBI investigators anywhere near it. 
 The campaign against Comey is pure intimidation. Itâ€™s also a warning. Any senior FBI people who value their careers are being warned to stay away. The Democrats are closing ranks around their nominee against the FBI. Itâ€™s an ugly and unprecedented scene. It may also be their last stand. 
 Hillary Clinton has awkwardly wound her way through numerous scandals in just this election cycle. But sheâ€™s never shown fear or desperation before. Now that has changed. Whatever she is afraid of, it lies buried in her emails with Huma Abedin. And it can bring her down like nothing else has.  
-    '''))
+    ''')
+
+print(a.characters_per_word())

@@ -2,9 +2,6 @@ import re
 from nltk.tokenize import sent_tokenize as st
 
 
-def count_total_words(text):
-    return total_words(text).__len__()
-
 def total_words(text):
     token_list = st(text)
     result = []
@@ -16,5 +13,19 @@ def total_words(text):
                 if word != '':
                     result.append(word)
     return result
+
+
+class Lexical:
+
+    def __init__(self, text):
+        self.words = total_words(text)
+        self.total_words = self.words.__len__()
+
+    def characters_per_word(self):
+        count_per_word = [w.__len__() for w in self.words]
+        sums = 0
+        for v in count_per_word:
+            sums += v
+        return sums / count_per_word.__len__()
             
 
