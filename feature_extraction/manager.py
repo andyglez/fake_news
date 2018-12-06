@@ -10,6 +10,7 @@ def manage(data, names):
         for j in names:
             aux += data[j][i] + "."
         corpus.append(aux)
-    for text in corpus:
+    for i, text in enumerate(corpus):
         news.append(News(text))
+        print('Processed ' + str(i) + ' ' + str(total))
     return news

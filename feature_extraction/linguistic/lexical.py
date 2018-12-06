@@ -1,18 +1,25 @@
 import re
-from nltk.tokenize import sent_tokenize as st
+from nltk.tokenize import word_tokenize as wt
 
 
 def total_words(text):
-    token_list = st(text)
+    token_list = wt(text)
     result = []
     for token in token_list:
-        all_language_signs = re.compile('[.!?,;:\t\\\\"\\(\\)\\\'\u2019\u2013\n]|\\s\\-\\s')
-        clean_word = all_language_signs.split(token)
-        for clean in clean_word:
-            for word in clean.split():
-                if word != '':
+        signs = re.compile('[^a-zA-Z0-9_\\+\\-/]')
+        clean_word = signs.split(token)
+        for word in clean_word:
+                if word != '' and not is_number(word):
                     result.append(word)
     return result
+
+
+def is_number(s):
+    try:
+        float(s) if '.' in s else int(s)
+        return True
+    except ValueError:
+        return False
 
 
 class Lexical:
