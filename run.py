@@ -1,6 +1,6 @@
-from feature_extraction.lexical import Lexical
+from feature_extraction.news import News
 
-a = Lexical(
+a = News(
     '''
     Daniel Greenfield, a Shillman Journalism Fellow at the Freedom Center, is a New York writer focusing on radical Islam. 
 In the final stretch of the election, Hillary Rodham Clinton has gone to war with the FBI. 
@@ -36,4 +36,4 @@ The campaign against Comey is pure intimidation. Itâ€™s also a warning. Any
 Hillary Clinton has awkwardly wound her way through numerous scandals in just this election cycle. But sheâ€™s never shown fear or desperation before. Now that has changed. Whatever she is afraid of, it lies buried in her emails with Huma Abedin. And it can bring her down like nothing else has.  
     ''')
 
-print(a.characters_per_word())
+print(a)
