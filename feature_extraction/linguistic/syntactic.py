@@ -1,5 +1,7 @@
 from whoosh.analysis import NgramFilter, StandardAnalyzer
 from nltk.tokenize import sent_tokenize as st
+from nltk.tokenize import word_tokenize as wt
+from nltk import pos_tag, RegexpParser
 import re
 
 
@@ -22,15 +24,24 @@ def sentences_lengths(text):
 
 class Syntactic:
     def __init__(self, text):
-        self.text = text
         self.average_length_sentence = sentences_lengths(text)
-        average = self.average_length_sentence
-        analyzer = StandardAnalyzer() | NgramFilter(minsize=average - 1, maxsize=average + 1)
-        self.tokens = analyzer(text)
+        tags = [pos_tag(words) for words in [wt(sent) for sent in st(text)]]
+        a = 0
+        parser = RegexpParser('''
+                            PHRASES: {<DT>* <NNP> <NNP>+}
+                            ''')
+        self.frequency_word_functions = self.__frequency_word_functions(tags, parser)
 
-    def __freq_function_words__(self, text):
-        freq = [text.count(tok.text) for tok in self.tokens]
-        return sum(freq) / float(len(freq))
+    def __frequency_word_functions(self, tags, parser):
+        phrases = []
+        for tagged_n_gram in tags:
+            chunks = parser.parse(tagged_n_gram)
+            for sub in chunks.subtrees(filter=lambda t: t.label() == 'PHRASES'):
+                phrases.append(' '.join([i[0] for i in sub]))
+        freq = [phrases.count(p) for p in phrases]
+        return sum(freq) / float(len(freq)) if not len(freq)   0 else 0
 
     def __str__(self):
-        return 'Average Length Sentences: ' + str(self.average_length_sentence)
+        result = 'Average Length Sentences: ' + str(self.average_length_sentence) + '\n'
+        result += 'Average Phrases Frequency: ' + str(self.frequency_word_functions)
+        return result
