@@ -22,26 +22,29 @@ def sentences_lengths(text):
     return sum(lens) / float(len(lens))
 
 
+def frequency_word_functions(tags, parser):
+    phrases = []
+    for tagged in tags:
+        chunks = parser.parse(tagged)
+        for sub in chunks.subtrees(filter=lambda t: t.label() == 'PHRASES'):
+            phrases.append(' '.join([i[0] for i in sub]))
+    freq = [phrases.count(p) for p in phrases]
+    return sum(freq) / float(len(freq)) if not len(freq) == 0 else 0
+
+
 class Syntactic:
     def __init__(self, text):
         self.average_length_sentence = sentences_lengths(text)
         tags = [pos_tag(words) for words in [wt(sent) for sent in st(text)]]
-        a = 0
         parser = RegexpParser('''
                             PHRASES: {<DT>* <NNP> <NNP>+}
                             ''')
-        self.frequency_word_functions = self.__frequency_word_functions(tags, parser)
-
-    def __frequency_word_functions(self, tags, parser):
-        phrases = []
-        for tagged_n_gram in tags:
-            chunks = parser.parse(tagged_n_gram)
-            for sub in chunks.subtrees(filter=lambda t: t.label() == 'PHRASES'):
-                phrases.append(' '.join([i[0] for i in sub]))
-        freq = [phrases.count(p) for p in phrases]
-        return sum(freq) / float(len(freq)) if not len(freq)   0 else 0
+        self.frequency_word_functions = frequency_word_functions(tags, parser)
 
     def __str__(self):
         result = 'Average Length Sentences: ' + str(self.average_length_sentence) + '\n'
         result += 'Average Phrases Frequency: ' + str(self.frequency_word_functions)
         return result
+
+    def to_list(self):
+        return [self.average_length_sentence, self.frequency_word_functions]

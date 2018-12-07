@@ -48,3 +48,6 @@ class Lexical:
 
     def contains(self, word):
         return self.large_words.count(word) > 0
+
+    def to_list(self):
+        return [self.total_words, len(self.unique_words), self.avg_characters, self.avg_freq]
