@@ -1,6 +1,7 @@
 from feature_extraction.news import News
 from os import system
-
+from math import sqrt
+from numpy import transpose
 
 def manage(data, names):
     news = []
@@ -26,3 +27,17 @@ def classes(data, name):
         else:
             result.append([0, 1])
     return result
+
+def normal(matrix):
+    return transpose([normalize(i) for i in transpose(matrix)])
+
+def normalize(weights):
+    den = normal_denominator(weights)
+    return [w / den for w in weights]
+
+
+def normal_denominator(weights):
+    den = 1
+    for x in [pow(w, 2) for w in weights]:
+        den += x
+    return sqrt(den)
