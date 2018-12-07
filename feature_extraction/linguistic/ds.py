@@ -35,6 +35,9 @@ def tf_idf(text):
     sentences = st(text)
     vect = TfidfVectorizer(min_df=1)
     tfidf = vect.fit_transform(sentences)
+    matrix = np.asarray((tfidf * tfidf.T).A)
+    matrix.resize(50, 50)
+    return matrix
 
 
 
