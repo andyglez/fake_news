@@ -1,6 +1,7 @@
+import numpy as np
 from collections import Counter
 from nltk.cluster.util import cosine_distance
-from utils import reshape_matrix, reshape_vector
+from feature_extraction.linguistic.utils import reshape_matrix, reshape_vector
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 def buildVector(iterable1, iterable2):
@@ -22,12 +23,5 @@ def calculate_cosine_distance(sentences, shape):
 def tf_idf(sentences, shape):
     vect = TfidfVectorizer(min_df=1)
     tfidf = vect.fit_transform(sentences)
-    return reshape_matrix((tfidf * tfidf.T).A, shape, shape)
-
-class DomainSpecific:
-    def __init__(self, sentences, shape):
-        self.cosine_distance = calculate_cosine_distance(sentences, shape)
-        self.tfidf = tf_idf(sentences, shape)
-    
-    def __str__(self):
-        return str(self.tfidf)
+    n = (tfidf * tfidf.T).A
+    return reshape_matrix(n, shape, shape)
