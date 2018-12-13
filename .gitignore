@@ -6,3 +6,11 @@ __pycache__/
 .idea/
 .vscode/
 .ipynb_checkpoints
+
+# Latex
+report/src/*.aux
+report/src/*.bbl
+report/src/*.blg
+report/src/*.log
+report/src/*.gz
+report/src/*.pdf
