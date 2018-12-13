@@ -1,5 +1,5 @@
 from feature_extraction.news import get_features
-from os import system
+from os import system, scandir
 import numpy as np
 
 def manage(corpus,shape):
@@ -16,6 +16,10 @@ def flat_input(corpus, classes, shape):
     prep = [n for n in news]
     outp = [[1, 0] if i == 'FAKE' else [0, 1] for i in classes]
     return np.asarray(prep), np.asarray(outp)
+
+def get_input_shape(shape):
+    k = len([i for i in scandir('./feature_extraction/linguistic')]) - 3
+    return (shape ** 2) * k
 
 def max_pos(l):
     m = 0
@@ -42,8 +46,8 @@ def calculate_metrics(pred, real):
     recall = result.count('TP') / (result.count('TP') + result.count('FN'))
     f1 = 2*((precision*recall)/(precision + recall))
     accuracy = (result.count('TP') + result.count('TN')) / (result.count('TP') + result.count('TN') + result.count('FN') + result.count('FP'))
-    msg = 'Precision: \t' + str(precision) + '\n'
-    msg += 'Recall: \t' + str(recall) + '\n'
-    msg += 'F1: \t\t' + str(f1) + '\n'
-    msg += 'Accuracy: \t' + str(accuracy)
+    msg = 'Precision: \t' + str(precision) + '\t --> \t' + str(int(precision * 100)) + '%\n'
+    msg += 'Recall: \t' + str(recall) + '\t --> \t' + str(int(recall * 100)) + '%\n'
+    msg += 'F1: \t\t' + str(f1) + '\t --> \t' + str(int(f1 * 100)) + '%\n'
+    msg += 'Accuracy: \t' + str(accuracy) + '\t --> \t' + str(int(accuracy * 100)) + '%'
     print(msg)

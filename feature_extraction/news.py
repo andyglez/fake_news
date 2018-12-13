@@ -18,10 +18,16 @@ def normal_denominator(weights):
         den += x
     return sqrt(den)
 
+def concat(a, b):
+    aux = [x for x in a]
+    for y in b:
+        aux.append(y)
+    return aux
+
 def get_features(text, shape):
     sentences = st(text)
     lexical = get_lexical_features(sentences, shape)
     syntactic = get_syntactic_features(sentences, shape)
     ds = tf_idf(sentences, shape)
-    aux = np.asarray(lexical) + np.asarray(syntactic) + np.asarray(ds)
+    aux = concat(concat(lexical, syntactic), ds)
     return np.asarray(normal(aux)).flatten()
