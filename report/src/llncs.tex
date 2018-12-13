@@ -34,9 +34,9 @@ y se decidir\'a la validez a partir de un an\'alisis utilizando t\'ecnicas de \t
 
 \section{Introducci\'on}\label{sec:Introduction}
 
-Muchos esfuerzos son dedicados en la actualidad para enfrentar la sombra que proyectan las divulgaciones falsas y negativas. En este trabajo se resumen las
-principales t\'ecnicas existentes para resolver esta problem\'atica as\'i como las diferencias entre los resultados aplicados a modelos que solamente dependen de la
-noticia en cuesti\'on como las propuestas enfocadas a las redes sociales, esto se puede encontrar en la secci\'on de \textbf{Estado del Arte}.
+Muchos esfuerzos son dedicados en la actualidad para enfrentar la sombra que proyectan las divulgaciones falsas y negativas sobre el sano uso de las redes sociales. 
+En este trabajo se resumen las principales t\'ecnicas existentes para resolver esta problem\'atica as\'i como las diferencias entre los resultados aplicados a modelos que 
+solamente dependen de la noticia en cuesti\'on como las propuestas enfocadas a las redes sociales, esto se puede encontrar en la secci\'on de \textbf{Estado del Arte}.
 
 Tomando en cuenta el an\'alisis arriba mencionado se proceder\'a a proponer una soluci\'on, en la secci\'on de igual nombre, basada en t\'ecnicas de ML con datos como
 titular y texto exclusivamente y utilizando un \textit{corpus} de clasificaci\'on en solamente dos categor\'ias, reales o falsas, utilizando las principales caracter\'isticas del
@@ -54,7 +54,51 @@ con ello, poder disfrutar en mayor medida de la parte sana de la actual difusi\'
 
 Sin pretensiones de alta profundizaci\'on en diversas tem\'aticas especialmente aplicadas a las redes sociales, o la propia definici\'on de noticias falsas, como pueden ser factores
  psicol\'ogicos, pol\'iticos, sociales u otros, se procede a continuar con la siguiente secci\'on, ce\~nida a elementos puramente computacionales.
+
 \section{Estado del Arte}
+
+A pesar de ser una tem\'atica relativamente nueva, en consecuencia de relevancia y de lo que apremia como problema social, existen numerosos trabajos que investigan e incluso
+ya explotan los bases del conocimiento adquirido. Sitios reportan hasta 90 \% de efectividad para clasificar una noticia en verdadera o falsa y para ello se bastan de las t\'ecnicas
+de NLP y ML, sin embargo utilizan otros datos relevantes a su entorno, datos sociales como pueden ser fuentes y referencias, o grado de pertenencia a grupos de confiabilidad en
+cuanto informaci\'on, entre otras.
+
+Los sistemas que indican un menor porcentage de efectividad analizan puramente texto, y hasta el momento la cifra m\'as elevada se encuentra en 76 \%. Parecer\'ia una cifra
+no tan alta, sin embargo, estudios indican que los humanos se equivocan el 70 \% de los casos en definir la veracidad de una noticia. Esto significa que para ser un sistema que
+automatiza el trabajo exhaustivo de analistas y que propone mejores resultados que ellos no est\'a nada mal.
+
+\subsection{Fundamentos NLP}
+
+Se define la problem\'atica como una situaci\'on espec\'ifica de ML, se tiene una base de conocimientos dados por noticias y sus clasificaciones y se pretende dise\'nar un modelo
+que aprenda de ello y sea capaz, entonces, de predecir nuevos resultados a partir de lo que ya sabe. La ciencia de los datos se divide en dos partes cuando acontece un problema
+de este tipo: primeramente se conocen los modelos existentes de ML para afrontarlo, pero sus entradas son vectores de datos y la base de conocimientos solamente posee texto, 
+es precisamente esa la segunda cuesti\'on y quiz\'as la m\'as importante del problema, la extracci\'on de datos relevantes para que el modelo propuesto clasifique correctamente.
+
+Entonces, descartando los datos que podr\'ian ser relevantes para los sistemas de manera general, quedamos solamente con los que podr\'ia ofrecer un texto dentro de la base del
+conocimiento, as\'i se definen los patrones linguisticos del lenguaje natural, los cuales se dividen en tres grupos fundamentales: lexicogr\'aficos, sint\'acticos y sem\'anticos. Los 
+elementos lexicogr\'aficos pueden ser, por ejemplo, una tabla de frecuencias de palabras con lo que se pueden denotar estilos en los usos de palabras dentro del texto. Los elementos
+sint\'acticos podr\'ian ser una tabla de frecuencias de frases u oraciones gramaticales con lo que se pueden denotar secciones relevantes a la noticia en su completitud. Por \'ultimo,
+tenemos los elementos sem\'anticos del texto, estos podr\'ian tomar la forma de similaridad espacio-vectorial entre oraciones.
+
+Los problemas que NLP contiene son mucho m\'as que lo que aborda este trabajo, sin embargo en cuanto a la extracci\'on de los elementos antes mencionados existen ya muchas t\'ecnicas.
+La tokenizaci\'on por oraciones y por palabras son soluciones que hoy podemos llamar \textit{straight-forward} y son claves para el resto del an\'alisis. Para la parte sint\'actica, la
+herramienta m\'as com\'un es la utilizaci\'on de \textit{POS-tagging}, basado en la implementaci\'on de un perceptr\'on pre-entrenado de la librer\'ia de su pertenencia para reconocer
+\textit{Parts-of-Speech} o partes del texto apoy\'andose en una gram\'atica para extraer las que se consideran relevantes al problema. En este tema existen grandes debates acerca
+de que parte del texto representa en mayor grado su oraci\'on o su texto propiamente. Para la extracci\'on de elementos sem\'anticos la pr\'actica m\'as com\'un est\'a basada en la 
+similaridad espacio-vectorial la cual, a su vez, se apoya en la t\'ecnicas como esquema de N-gramas o \textit{Bag-of-Words}. Estas t\'ecnicas vectorizan y cuantifican la relaci\'on de una 
+frase de tama\~no n, o un conjunto de palabras, en su \'ambito oracional.
+
+\subsection{Fundamentos Aplicados ML}
+
+El modelo de ML a utilizar es la otra secci\'on del dise\~no, sin embargo, cual sea el escogido, todos los vectores y matrices recogidos utilizando las t\'ecnicas vistas anteriormente deben
+ser normalizados y recontorneados para acomodarse al modelo; por ejemplo, si se ten\'ia como resultado una matriz y se requiere de un conjunto de datos plano, entonces la primera ser\'a
+aplanada, es decir, convertida a un vector.
+
+La pr\'actica com\'un para la detecci\'on de noticias falsas utiliza los algoritmos de redes neuronales para el entrenamiento o aprendizaje del modelo de clasificaci\'on en falsas o verdaderas.
+Sin embargo, las categor\'ias oficiales de estos sistemas son: basados en conocimientos y basados en estilos. Los primeros se acercan mucho a la problem\'atica en la web y como enfocarlo
+desde tal punto de vista, mientras que la detecci\'on de estilos propone un profundo an\'alisis textual para definir la veracidad de la noticia. Para la detecci\'on de estilos se han utilizado,
+incluso, redes convolucionales dependiendo de la magnitud de datos a procesar.
+
+\section{Propuesta de Soluci\'on}
 \end{multicols}
 
 \bibliographystyle{apa}
