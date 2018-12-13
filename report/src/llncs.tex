@@ -10,28 +10,51 @@
 \begin{document}
 
 
-\title{T}
+\title{Detecci\'on autom\'atica de noticias falsas}
 
-\author{Andy Gonz\'alez Pe\~na}
+\author{Andy Gonz\'alez Pe\~na \\ a.gonzalez@estudiantes.matcom.uh.cu}
+\institute{Matem\'atica y Computaci\'on, Universidad de la Habana, 2018}
 
-\institute{MATCOM, Universidad de la Habana, 2018}
 \maketitle
+
+
+\begin{multicols}{2}[]
 
 \begin{abstract}
 
-
+Con el auge de las redes sociales el consumo de informaci\'on negativa ha aumentado exponencialmente al punto que se requieren de nuevos mecanismos
+que, al menos, regulen su circulaci\'on. Encabezando la lista se encuentran las noticias falsas que, a pesar de siempre haber existido ya sea por fines pol\'iticos
+u otros, toman nueva relevancia al aparentar pertenecer a canales oficiales o aparecer en la red de confianza de un usuario de una determinada red social.
+En este trabajo se presentan las caracter\'isticas principales del problema antes de la aplicaci\'on en la web que se conoce en la actualidad, es decir, se propone
+como reconocer patrones de una noticia desde el punto de vista est\'atico en el que no se puede hacer nada por no recibir tal noticia, todo lo contrario, se recibe
+y se decidir\'a la validez a partir de un an\'alisis utilizando t\'ecnicas de \textit{Machine Learning} (ML).
 
 \end{abstract}
-
-\begin{keywords}
-
-\end{keywords}
-
-\begin{multicols}{2}[]
 
 
 \section{Introducci\'on}\label{sec:Introduction}
 
+Muchos esfuerzos son dedicados en la actualidad para enfrentar la sombra que proyectan las divulgaciones falsas y negativas. En este trabajo se resumen las
+principales t\'ecnicas existentes para resolver esta problem\'atica as\'i como las diferencias entre los resultados aplicados a modelos que solamente dependen de la
+noticia en cuesti\'on como las propuestas enfocadas a las redes sociales, esto se puede encontrar en la secci\'on de \textbf{Estado del Arte}.
+
+Tomando en cuenta el an\'alisis arriba mencionado se proceder\'a a proponer una soluci\'on, en la secci\'on de igual nombre, basada en t\'ecnicas de ML con datos como
+titular y texto exclusivamente y utilizando un \textit{corpus} de clasificaci\'on en solamente dos categor\'ias, reales o falsas, utilizando las principales caracter\'isticas del
+procesamiento de lenguaje natural (NLP) que no depender\'a de entidades externas como en una plataforma social, es decir, autores o referencias, sino utilizando \'unicamente 
+los patrones m\'as abundantes dentro del texto. En consecuencia, se ofrecer\'an los resultados alcanzados y la relevancia de los mismos en comparaci\'on con los sistemas 
+ya existentes en explotaci\'on.
+
+Dentro de la rama de miner\'ia de datos, la detecci\'on autom\'atica de noticias falsas se encuentra a\'un en sus inicios y existen muchos trabajos y discusiones abiertas,
+por tanto, la propuesta de soluci\'on no deber\'a ser tomada a la ligera ni con el af\'an de implementaci\'on \'optima. De manera concluyente se presentan aspectos te\'oricos
+que podr\'ian brindar mejores resultados as\'i como futuras incorporaciones que deber\'an ser aplicadas con el objetivo de proponer un sistema altamente certero.
+
+Con este trabajo se persigue la consolidaci\'on de los conocimientos b\'asicos de miner\'ia de datos, inteligencia artificial y sistemas de informaci\'on en cuesti\'on, la aplicaci\'on 
+de esquemas de procesamiento de lenguaje natural (NLP) y abrir nuevos debates constructivos que impacten en un grado positivo sistemas de estas caracter\'isticas para, 
+con ello, poder disfrutar en mayor medida de la parte sana de la actual difusi\'on de la informarci\'on.
+
+Sin pretensiones de alta profundizaci\'on en diversas tem\'aticas especialmente aplicadas a las redes sociales, o la propia definici\'on de noticias falsas, como pueden ser factores
+ psicol\'ogicos, pol\'iticos, sociales u otros, se procede a continuar con la siguiente secci\'on, ce\~nida a elementos puramente computacionales.
+\section{Estado del Arte}
 \end{multicols}
 
 \bibliographystyle{apa}
