@@ -139,7 +139,26 @@ objetivo que describe el conjunto de datos y la segunda se dedica a evaluar el \
 
 \section{Resultados}
 
+Se utilizan las m\'etricas de precisi\'on, recobrado (\textit{recall}), F1 y eficacia (\textit{accuracy}), sin embargo los porcentajes antes mencionados son valores de eficacia del sistema.
+Aunque no se presume de competir con resultados altos seg\'un indica el estado del arte, para sistemas con estas caracter\'isticas se tienen 76 \%, se ha obtenido buenos valores de eficacia. A continuaci\'on se presentan algunos ejemplos:\\
 
+\begin{tabular}{l|c|c|c|r} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
+	\hline
+	\textbf{Medidas \%} & \textbf{L\'ex.} & \textbf{Sint.} & \textbf{Sem.} & \textbf{Todos}\\
+	\hline
+	\textbf{Precisi\'on} & 53 & 62 & 78 & 72\\
+	\hline
+	\textbf{Recobrado} & 63 & 36 & 53 & 70\\
+	\hline
+	\textbf{F1} & 58 & 46 & 64 & 71\\
+	\hline
+	\textbf{Eficacia} & 54 & 57 & 70 & 72\\
+	\hline
+\end{tabular}\\
+
+Como se puede observar, con las primeras tres medidas corridas se obtiene un alto desbalance entre las m\'etricas de precisi\'on y recobrado, aumentando poco a poco los valores de
+eficacia total hasta que en la tercera se proveen de medidas cercanas al objetivo a perseguir; sin embargo, es la combinaci\'on de todas las cuales aumentan esa eficacia total requerida
+hasta llegar a un 72 \%, a\'un por encima de los \'indices de reconocimiento humano y solamente un 4 \% por debajo del mejor sistema actual.
 \end{multicols}
 
 \bibliographystyle{apa}
