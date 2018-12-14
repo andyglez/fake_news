@@ -18,7 +18,7 @@ def flat_input(corpus, classes, shape):
     return np.asarray(prep), np.asarray(outp)
 
 def get_input_shape(shape):
-    k = len([i for i in scandir('./feature_extraction/linguistic')]) - 3
+    k = len([i for i in scandir('./feature_extraction/linguistic') if not 'pycache' in str(i)]) - 2
     return (shape ** 2) * k
 
 def max_pos(l):
