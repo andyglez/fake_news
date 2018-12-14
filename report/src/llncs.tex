@@ -79,7 +79,8 @@ elementos lexicogr\'aficos pueden ser, por ejemplo, una tabla de frecuencias de 
 sint\'acticos podr\'ian ser una tabla de frecuencias de frases u oraciones gramaticales con lo que se pueden denotar secciones relevantes a la noticia en su completitud. Por \'ultimo,
 tenemos los elementos sem\'anticos del texto, estos podr\'ian tomar la forma de similaridad espacio-vectorial entre oraciones.
 
-Los problemas que NLP contiene son mucho m\'as que lo que aborda este trabajo, sin embargo en cuanto a la extracci\'on de los elementos antes mencionados existen ya muchas t\'ecnicas.
+Los problemas que NLP contiene son mucho m\'as que lo que aborda este trabajo, sin embargo en cuanto a la extracci\'on de los elementos antes mencionados existen ya muchas
+t\'ecnicas.
 La tokenizaci\'on por oraciones y por palabras son soluciones que hoy podemos llamar \textit{straight-forward} y son claves para el resto del an\'alisis. Para la parte sint\'actica, la
 herramienta m\'as com\'un es la utilizaci\'on de \textit{POS-tagging}, basado en la implementaci\'on de un perceptr\'on pre-entrenado de la librer\'ia de su pertenencia para reconocer
 \textit{Parts-of-Speech} o partes del texto apoy\'andose en una gram\'atica para extraer las que se consideran relevantes al problema. En este tema existen grandes debates acerca
@@ -99,6 +100,46 @@ desde tal punto de vista, mientras que la detecci\'on de estilos propone un prof
 incluso, redes convolucionales dependiendo de la magnitud de datos a procesar.
 
 \section{Propuesta de Soluci\'on}
+
+Dadas las caracter\'isticas del \textit{corpus} a utilizar, el cual contiene t\'itulo, cuerpo y clasificaci\'on, se propone la implementaci\'on de un modelo basado en estilos para insertar
+profundidad en el an\'alisis textual de la base de conocimientos. En consecuencia, el procedimiento de ML se llevar\'a aplicando las secuencias de entrenamiento, validaci\'on y predicci\'on
+que conlleva el uso de los algoritmos de redes neuronales, sin llegar al despliegue total de las redes convolucionales. Junto a ello, para la extracci\'on de \textit{features} se procede
+a la implementaci\'on de los aspectos antes mencionados de NLP, es decir, el an\'alisis lexicogr\'afico, sint\'actico y sem\'antico.
+
+\subsection{Especificidades y Dependencias}
+
+La soluci\'on se ha escrito en Python (v. 3.6.1) de la distribuci\'on de Anaconda y se utilizan diferentes librer\'ias para cumplir los objetivos planteados. Para la implementaci\'on de redes
+neuronales, se utiliza la librer\'ia de \textit{Tensorflow} y dentro, espec\'ificamente, el \textit{framework} de \textit{Keras} el cual provee un mayor nivel de abstracci\'on en la resoluci\'on
+modular de los problemas de ML. Para los an\'alisis de patrones lingu\'isticos se utiliza NLTK, herramienta poderosa que contiene muchas sub-librer\'ias de alto valor funcional,
+espec\'ificamente y aplicado a este trabajo, se denotan las secciones de tokenizaci\'on, de POS-tagging y extracci\'on gramatical. Mientras, para la vectorizaci\'on en el c\'alculo de
+similaridad, se utiliza la librer\'ia de \textit{sklearn}, en las secci\'on de extracci\'on de \textit{features}.
+
+\subsection{Estructura y Funcionalidades}
+
+Se comienza con la carga de la base de conocimientos y se procede a el an\'alisis de patrones existentes en la misma. Dado que el proyecto va enfocado al procesamiento de textos,
+contin\'ua a la extracci\'on de caracter\'isticas puntuales o de estilos dentro de los textos de noticias, para este caso se denominan los \textit{features} lingu\'isticos.
+
+Dentro de las caracter\'isticas lingu\'isticas, el an\'alisis se divide en tres: lexicogr\'afico, sint\'actico y sem\'antico. En el primero se pretende encontrar el uso o frecuencias de palabras
+dentro de el texto de la noticia, y con ello proponer la primera caracter\'istica de estilos: probabilidad de que una noticia sea falsa si el estilo de repetici\'on de palabras contiene unas
+frecuencias de $x_1$, $x_2$, ..., $x_n$. De la misma manera, el an\'alisis sint\'actico pretende encontrar las repeticiones de frases que se asumen que tienen peso dentro de cada
+oraci\'on del texto como pueden ser las nominaciones (sustantivos) con sus calificaciones (adjetivos) junto al posible uso de art\'iculos, entre otros; as\'i se construye otra tabla de
+frecuencias y se propone otra caracter\'istica de estilos: probabilidad de que una noticia sea falsa si el estilo de repetici\'on de frases contiene unas frecuencias de $y_1$, $y_2$, ...,
+$y_n$. Por \'ultimo, el an\'alisis sem\'antico procede al c\'alculo de la similaridad entre oraciones, es decir, se analiza las relaciones de concordancia en el texto, entonces se obtiene
+la probabilidad de que una noticia sea falsa dado que su estilo contiene tales grados de concordancia a la idea general que indica, esto se calcula mediante combinaciones de frases
+dentro de las mismas oraciones seg\'un el modelo de N-gramas, frecuencias y sus inversas (tf*idf) para denotar su peso en la idea y la normalizaci\'on matricial para computar el grado 
+de similaridad.
+
+Una vez extra\'idos los principales patrones se obtienen de ellos matrices de datos relevantes para la clasificaci\'on, sin embargo, estas pueden ser de tama\~nos variables y, por ende,
+es necesario llevarlas todas a la misma medida de tal forma que se conforme la descripci\'on vectorial de una noticia. Una vez computado el vector de cada patr\'on se contin\'ua a la 
+combinaci\'on de ellos mediante la concatenaci\'on de listas.
+
+Estos vectores conformar\'an los verdaderos conjuntos de entrenamiento y validaci\'on para las redes neuronales. Con el objetivo de lograr esto, se utiliza el m\'etodo de \textit{k-fold},
+espec\'ificamente \textit{2-fold} en el que se divide el \textit{corpus} en dos conjuntos: los llamados entrenamiento y validaci\'on. En el primero se ajusta el modelo a minimizar la funci\'on
+objetivo que describe el conjunto de datos y la segunda se dedica a evaluar el \'indice de correctitud de las predicciones del sistema.
+
+\section{Resultados}
+
+
 \end{multicols}
 
 \bibliographystyle{apa}
