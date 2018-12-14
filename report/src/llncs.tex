@@ -3,6 +3,7 @@
 %
 \usepackage{geometry} % to change the page dimensions
 \usepackage{natbib}
+\usepackage{blindtext}
 
 
 \geometry{a4paper}
@@ -139,8 +140,29 @@ objetivo que describe el conjunto de datos y la segunda se dedica a evaluar el \
 
 \section{Resultados}
 
-Se utilizan las m\'etricas de precisi\'on, recobrado (\textit{recall}), F1 y eficacia (\textit{accuracy}), sin embargo los porcentajes antes mencionados son valores de eficacia del sistema.
-Aunque no se presume de competir con resultados altos seg\'un indica el estado del arte, para sistemas con estas caracter\'isticas se tienen 76 \%, se ha obtenido buenos valores de eficacia. A continuaci\'on se presentan algunos ejemplos:\\
+Se utilizan las m\'etricas de precisi\'on, recobrado (\textit{recall}), F1 y eficacia (\textit{accuracy}). Se define las siguientes variables:
+
+\begin{itemize}
+\item TP (\textit{True Positive})		: cuando se predice una noticia falsa y est\'a anotada realmente como una noticia falsa.
+\item TN (\textit{True Negative})		: cuando se predice una noticia verdadera y est\'a anotada realmente como una noticia verdadera.
+\item FN (\textit{False Negative})	: cuando se predice una noticia verdadera y est\'a anotada realmente como una noticia falsa.
+\item FP (\textit{False Positive})		: cuando se predice una noticia falsa y est\'a anotada realmente como una noticia verdadera.
+\end{itemize}
+
+Luego se formulan las m\'etricas seg\'un ellas de la siguiente manera:\\
+
+Precisi\'on$ = \frac{|TP|}{|TP| + |FP|}$\\
+
+Recobrado$ = \frac{|TP|}{|TP| + |FN|}$\\
+
+F1  $= 2 * \frac{Precision * Recobrado}{Precision + Recobrado}$\\
+
+Eficacia $ = \frac{|TP| + |TN|}{|TP| + |TN| + |FP| + |FN|}$\\
+
+Sin embargo los porcentajes antes mencionados son valores de eficacia del sistema. Aunque no se presume de competir con resultados altos seg\'un indica el estado del arte, para
+sistemas con estas caracter\'isticas se tienen 76 \%, se ha obtenido buenos valores de eficacia. \\
+
+A continuaci\'on se presentan ejemplos de corridas del modelo para mostrar sus evaluaciones seg\'un las m\'etricas indicadas:\\
 
 \begin{tabular}{l|c|c|c|r} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
 	\hline
@@ -156,9 +178,18 @@ Aunque no se presume de competir con resultados altos seg\'un indica el estado d
 	\hline
 \end{tabular}\\
 
-Como se puede observar, con las primeras tres medidas corridas se obtiene un alto desbalance entre las m\'etricas de precisi\'on y recobrado, aumentando poco a poco los valores de
-eficacia total hasta que en la tercera se proveen de medidas cercanas al objetivo a perseguir; sin embargo, es la combinaci\'on de todas las cuales aumentan esa eficacia total requerida
-hasta llegar a un 72 \%, a\'un por encima de los \'indices de reconocimiento humano y solamente un 4 \% por debajo del mejor sistema actual.
+Como se puede observar en la tabla, con las primeras tres medidas corridas se obtiene un alto desbalance entre las m\'etricas de precisi\'on y recobrado, aumentando poco a poco los
+valores de eficacia total hasta que en la tercera se proveen de medidas cercanas al objetivo a perseguir; sin embargo, es la combinaci\'on de todas las cuales aumentan esa eficacia total
+requerida hasta llegar a un 72 \%, a\'un por encima de los \'indices de reconocimiento humano y solamente un 4 \% por debajo del mejor sistema actual en explotaci\'on.
+
+\section{Conclusiones}
+
+A pesar de haber obtenido buenos resultados quedar\'a pendiente el mencionado 4 \%. Para ello se propone como posible soluci\'on y futura discusi\'on la aplicaci\'on de algoritmos de
+\textit{clustering} para la agrupaci\'on por temas y con ello proveer de una nueva caracter\'istica descriptiva: calcular la probabilidad de que, dado un tema asociado, la noticia sea falsa.
+
+De esta forma se asume la soluci\'on como a\'un no \'optima denotando varias caracter\'isticas posibles que podr\'ian ser utilizadas para obtener resultados m\'as altos. Obviamente,
+la completitud de esta idea se encuentra todav\'ia en estudios. Por estas razones, el tema se presenta tan atractivo ya que propone un desaf\'io para las t\'ecnicas actuales.
+
 \end{multicols}
 
 \bibliographystyle{apa}
